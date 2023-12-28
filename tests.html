@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      JOHN's other tests
+    </title>
+  </head>
+  <body>
+    <style>
+      .paraClass {
+        font-weight: bold;
+        color: red;
+        font-size: 30px;
+      }
+      .patientParaClass {
+        font-weight: bold;
+        color: blue;
+        font-size: 30px;
+      }
+    </style>
+
+    <div id='div1'>
+      <form class='TopMenuClass' id='TopMenu'>
+        <p class='paraClass' id='TopMenuPara'>Top Menu</p>
+        <button onclick='
+        let formReferenceToShow =document.getElementById(dashBoardForm);
+        let formReferenceToHide = document.getElementById(patientForm);
+        Dashboard(formReferenceToShow,formReferenceToHide);        
+        '>Dashboard</button>
+        <button onclick='
+        //let formReference =document.getElementById(patientForm);
+        let formReferenceToShow =document.getElementById(patientForm);
+        let formReferenceToHide = document.getElementById(dashBoardForm);
+        Dashboard(formReferenceToShow,formReferenceToHide);
+        '>Patient Search</button>
+      </form>
+
+      <form class='patientClass' id='patientForm'>
+        <p class="patientParaClass" id='patientParaClass'>Patient Profile:</p>
+        <button class='patientNameCL' id='patientNameID' onclick='
+          let formReference =document.getElementById(patientNameID);
+          updateConsole ();
+        '>Patient Name:</button>
+      </form>
+
+      <form class='formClass' id='dashBoardForm'>
+        <p class='paraClass' id='dashBoardPara'>LTC Dashboard</p>
+        <button class='patientButtonClass' id='patientButton' onclick='openPatientPanel ()'>patientNo</button>
+        <button class='patientButtonClass' id='patientCountButton' onclick='openPatientPanel ()'>profile</button>
+      </form>
+
+    </div>
+
+    <script>
+      Startup ();
+      
+      function startUp () {
+        alert('Beginning - Line 35.  First Line of Script');
+        Dashboard();
+      }
+
+      function Dashboard (WhichForm, OtherForm) {
+        alert('Line 53. Beginning of the Dashboard reveal function');
+        document.getElementById('TopMenu').style.visibility= "visible";
+        document.getElementById(OtherForm).style.visibility= "hidden";
+        document.getElementById(WhichForm).style.visibility= "visible";
+        alert('Line 56.  End of the Dashboard reveal function');
+      }
+
+      function openPatientPanel (WhichForm, Otherform) {
+        alert('Line 61. Beginning of the Patient Profile reveal function');
+        document.getElementById('TopMenu').style.display= "block";
+        document.getElementById('dashBoardForm').style.display= "none";
+        document.getElementById(WhichForm).style.display= "block";
+        alert('Line 63.  Inside the Patient Profile reveal function');
+      }
+
+      function MakePatientChart () {
+          let myObject= {
+            name: 'Marigold',
+            age: 39,
+            PMHx: ['Diabetes','HTN','COPD'],
+            meds: ['Metformin','Ramipril','Spiriva']
+          }
+          console.log(myObject.PMHx);
+          let myPara =document.getElementById('paraId');
+          myPara.innerHTML = 'Name: ' + myObject.name;
+      }
+
+      function updateConsole () {
+        console.log('PatientName button pressed');
+        alert('pause');
+      }
+
+      //function ListPatients () {}
+
+    </script>
+  </body>
+</html>

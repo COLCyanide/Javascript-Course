@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      JOHN's Variables Lesson
+    </title>
+  <!--  <Link> rel= "stylesheet" href="/style.css">
+  -->
+  </head>
+  <body>
+    <style>
+      .LetterBoxClass {
+        position: absolute;
+        margin-top: 150px;
+        margin-left: 150px;
+        /*height: 5em;*/
+        /*rows = "8";*/
+        cursor: pointer;
+      }
+      .LetterBoxButtonClass {
+        padding-top: 14px;
+        padding-bottom: 12px;
+        font-weight: bold;
+        position: absolute;
+        margin-top: 150px;
+        margin-left: 330px; 
+        cursor: pointer;
+      }
+      .LetterBoxClearButtonClass {
+        padding-top: 14px;
+        padding-bottom: 12px;
+        font-weight: bold;
+        position: absolute;
+        margin-top: 150px;
+        margin-left: 380px; 
+        cursor: pointer;
+      }
+      .RadioCity1 {
+        position: absolute;
+        margin-top: 230px;
+        margin-left: 150px;
+      }
+      .RadioCity2 {
+        position: absolute;
+        margin-top: 230px;
+        margin-left: 240px;
+      }
+      .RadioLabel1Class {
+        border: none;
+        color: blue;
+        font-weight: bold;
+        position: absolute;
+        margin-top: 228px;
+        margin-left: 165px;
+      }
+      .RadioLabel2Class {
+        border: none;
+        color: red;
+        font-weight: bold;
+        position: absolute;
+        margin-top: 228px;
+        margin-left: 255px;
+      }
+      .TextBoxClass {
+        color: red;
+        padding: 0px;
+        margin: 0px;
+        height: 1em;
+        width: 500px;
+      }
+      .HiddenLetterClass {
+        visibility: hidden;
+      }
+    </style>
+
+    <div id='div1'>
+      <form>
+        <textarea class="LetterBoxClass" id='LetterBox' rows="4" onkeyup="
+        //console.log(event.key);
+        if (event.key === 'Enter') 
+          {
+            SpliceOutEnter ('LetterBox');
+          }"></textarea>
+
+        <input type="button" class= 'LetterBoxButtonClass' id = 'LetterBoxButton' value = "Click" onclick = "PutBoxInfoToPara('LetterBox')" />
+
+        <!--<label id = "label"></label>-->
+        <input type="button" class= 'LetterBoxClearButtonClass' id='LetterBoxClearButton' value = "Clear" onclick = "ClearLetterBox('LetterBox')" />
+
+        <!--Radio Buttons-1-->  
+        <input type="radio" class="RadioCity1" name="Choice" value="Item1" id="ITEM1" onclick = "RadioToLetterBox('ITEM1')"/>
+
+          <!--Radio Button-1 Label-->
+          <label for = "ITEM1" class='RadioLabel1Class' id="RadioLabel1">ItemOne</label>
+
+        <!--Radio Buttons-2-->  
+        <input type="radio" class="RadioCity2" name="Choice" value="Item2" id="ITEM2" onclick = "RadioToLetterBox('ITEM2')">
+
+          <!--Radio Button-2 Label-->
+          <label for = "ITEM2" class= 'RadioLabel2Class' id="RadioLabel2">ItemTwo</label>
+        <div id="LetterPara" class="TextBoxClass"></div>
+      </form>
+    </div>
+
+    <script>
+      function PutBoxInfoToPara(WhichBox) {
+        // This Function replaces the contents of the Letter Paragraph with anything in the Text Box once the button is pressed
+        let txtName = document.getElementById(WhichBox);
+        let lblName = document.getElementById("label");
+        let LetterParaVector = document.getElementById('LetterPara'); 
+        TextBoxHTML = txtName.value;
+        let TextBoxHTMLProcessed = Splice2LetterForm(TextBoxHTML,"~~");
+        LetterParaVector.innerHTML += TextBoxHTMLProcessed;
+        txtName.value = "";
+      } 
+
+      function ClearLetterBox(WhichBox) {
+        let txtName = document.getElementById(WhichBox);
+        let lblName = document.getElementById("label");
+        let LetterParaVector = document.getElementById('LetterPara');
+        alert(LetterParaVector.innerHTML);
+        alert(LetterParaVector.innerText);
+        let TextBoxHTML = "";
+        LetterParaVector.innerHTML = TextBoxHTML;
+        txtName.value = "";
+      }
+
+      function RadioToLetterBox(WhichItem) {
+        //This function replaces anything in the Text Box with the value of the selected radio box.  It also follows logic to determine whether to add more text to the Text Box
+        var ButtonFill = document.getElementById(WhichItem);
+        var BoxContent = document.getElementById("LetterBox");
+        var BoxContentLabel = document.getElementById("label");
+        BoxContent.value = ButtonFill.value;
+        let OldPatientLetter = BoxContent.value;
+        let NewPatientLetter = "";
+        if (WhichItem == 'ITEM1') {
+          NewPatientLetter = "<p class ='TextBoxClass'>"+ OldPatientLetter + "</p>";
+        } else {
+          PatientLetter +="";
+        }
+        BoxContent.value = NewPatientLetter;
+      }
+
+      function Splice2LetterForm (StringEntered,Target) {
+        let NewString= StringEntered;
+        let SpliceSpot = NewString.search(Target);
+        while (SpliceSpot > 0) {
+          let ContentsLeft = NewString.slice(0,SpliceSpot);
+          let ContentsRight = NewString.slice(SpliceSpot+2);
+          NewString= ContentsLeft+'</p><p>'+ContentsRight;
+          SpliceSpot = NewString.search(Target);
+        }
+        return NewString;
+      }
+      
+      function SpliceOutEnter (LetterBox) {
+        let contents= document.getElementById('LetterBox');
+        let contentsLength= contents.value.length;
+        let contentsLeft= contents.value.slice(0,contentsLength-1);
+        let contentsRight= contents.value.slice(contentsLength-1);
+        let newContents= contentsLeft+'</p><p>'+contentsRight;
+        contents.value= newContents;
+      }
+    </script>
+  </body>
+</html>

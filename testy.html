@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Move Radio Button Labels</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <label>
+    <input type="radio" name="group" id="option1" value="option1"> Option 1
+  </label>
+  <label>
+    <input type="radio" name="group" id="option2" value="option2"> Option 2
+  </label>
+
+  <script>
+    // Function to move radio button labels
+    function moveLabels() {
+      // Get the labels
+      var label1 = document.querySelector('label[for="option1"]');
+      var label2 = document.querySelector('label[for="option2"]');
+
+      // Move labels to a new position
+      label1.style.marginLeft = '150px';
+      label2.style.marginLeft = '150px';
+    }
+
+    // Call the function when the page is loaded
+    window.onload = moveLabels;
+  </script>
+
+</body>
+</html>
